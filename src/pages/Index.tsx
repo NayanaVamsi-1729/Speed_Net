@@ -7,7 +7,9 @@ import { MetricCard } from '@/components/MetricCard';
 import { NetworkRating } from '@/components/NetworkRating';
 import { Recommendations } from '@/components/Recommendations';
 import { ResultsSummary } from '@/components/ResultsSummary';
+import { SettingsDropdown } from '@/components/SettingsDropdown';
 import { useSpeedTest } from '@/hooks/useSpeedTest';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { toast } from '@/hooks/use-toast';
 
 const Index = () => {
@@ -25,6 +27,8 @@ const Index = () => {
     calculateStability,
   } = useSpeedTest();
 
+  const { t } = useLanguage();
+
   const [showDownload, setShowDownload] = useState(true);
   const [showUpload, setShowUpload] = useState(true);
   const [copied, setCopied] = useState(false);
@@ -33,10 +37,10 @@ const Index = () => {
   const isCompleted = status === 'completed' && results !== null;
 
   const getGaugeLabel = () => {
-    if (status === 'testing-download') return 'Testing Download';
-    if (status === 'testing-upload') return 'Testing Upload';
-    if (isCompleted) return 'Test Complete';
-    return 'Ready to Test';
+    if (status === 'testing-download') return t('testingDownload');
+    if (status === 'testing-upload') return t('testingUpload');
+    if (isCompleted) return t('testComplete');
+    return t('readyToTest');
   };
 
   const handleCopyResults = () => {
@@ -66,13 +70,21 @@ Stability: ${calculateStability()}
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b border-border/50 py-8">
-        <div className="container max-w-4xl mx-auto px-4 text-center">
-          <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-2">
-            Internet Speed Test
-          </h1>
-          <p className="text-muted-foreground">
-            Browser-based network performance analysis
-          </p>
+        <div className="container max-w-4xl mx-auto px-4">
+          <div className="flex items-center justify-between">
+            <div className="flex-1" />
+            <div className="text-center flex-1">
+              <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-2">
+                {t('title')}
+              </h1>
+              <p className="text-muted-foreground">
+                {t('subtitle')}
+              </p>
+            </div>
+            <div className="flex-1 flex justify-end">
+              <SettingsDropdown />
+            </div>
+          </div>
         </div>
       </header>
 
@@ -82,34 +94,25 @@ Stability: ${calculateStability()}
           {status === 'idle' ? (
             <Button variant="start" size="xl" onClick={startTest}>
               <Play className="w-5 h-5" />
-              Start Test
+              {t('startTest')}
             </Button>
           ) : isRunning ? (
             <Button variant="stop" size="xl" onClick={stopTest}>
               <Square className="w-5 h-5" />
-              Stop
+              {t('stop')}
             </Button>
           ) : (
             <div className="flex gap-4">
               <Button variant="start" size="lg" onClick={restartTest}>
                 <RotateCcw className="w-4 h-4" />
-                Restart Test
+                {t('restartTest')}
               </Button>
               <Button variant="action" size="lg" onClick={handleCopyResults}>
                 {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                {copied ? 'Copied' : 'Copy Results'}
+                {copied ? t('copied') : t('copyResults')}
               </Button>
             </div>
           )}
-        </section>
-
-        {/* Advertisement Slot */}
-        <section className="flex justify-center">
-          <div className="w-full max-w-[728px] h-[90px] md:h-[90px] rounded-lg border border-dashed border-border/50 flex items-center justify-center bg-muted/20">
-            <span className="text-xs text-muted-foreground uppercase tracking-widest">
-              Advertisement
-            </span>
-          </div>
         </section>
 
         {/* Speed Gauge */}
@@ -125,24 +128,24 @@ Stability: ${calculateStability()}
         {/* Live Metrics Grid */}
         <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <MetricCard
-            label="Download"
+            label={t('download')}
             value={isRunning && currentPhase === 'download' ? currentSpeed : (results?.download || 0)}
             unit="Mbps"
             variant="download"
           />
           <MetricCard
-            label="Upload"
+            label={t('upload')}
             value={isRunning && currentPhase === 'upload' ? currentSpeed : (results?.upload || 0)}
             unit="Mbps"
             variant="upload"
           />
           <MetricCard
-            label="Ping"
+            label={t('ping')}
             value={liveMetrics.ping || results?.ping || 0}
             unit="ms"
           />
           <MetricCard
-            label="Jitter"
+            label={t('jitter')}
             value={liveMetrics.jitter || results?.jitter || 0}
             unit="ms"
           />
@@ -158,6 +161,17 @@ Stability: ${calculateStability()}
               onToggleDownload={() => setShowDownload(!showDownload)}
               onToggleUpload={() => setShowUpload(!showUpload)}
             />
+          </section>
+        )}
+
+        {/* Advertisement Slot - Below Speed Graph */}
+        {(isRunning || graphData.length > 0) && (
+          <section className="flex justify-center animate-fade-in">
+            <div className="w-full max-w-[728px] h-[90px] md:h-[90px] rounded-lg border border-dashed border-border/50 flex items-center justify-center bg-muted/20">
+              <span className="text-xs text-muted-foreground uppercase tracking-widest">
+                {t('advertisement')}
+              </span>
+            </div>
           </section>
         )}
 
@@ -193,7 +207,7 @@ Stability: ${calculateStability()}
           <section className="flex justify-center animate-fade-in">
             <div className="card-glass px-6 py-3 flex items-center gap-3">
               <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              <span className="text-sm text-muted-foreground">Test Duration:</span>
+              <span className="text-sm text-muted-foreground">{t('testDuration')}:</span>
               <span className="font-mono text-foreground">
                 {liveMetrics.duration.toFixed(1)}s
               </span>
@@ -206,7 +220,7 @@ Stability: ${calculateStability()}
       <footer className="border-t border-border/50 py-6 mt-8">
         <div className="container max-w-4xl mx-auto px-4">
           <p className="text-center text-xs text-muted-foreground">
-            Browser-based estimation. Results may vary from ISP measurements.
+            {t('footer')}
           </p>
         </div>
       </footer>

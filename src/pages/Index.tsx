@@ -11,6 +11,7 @@ import { SettingsDropdown } from '@/components/SettingsDropdown';
 import { useSpeedTest } from '@/hooks/useSpeedTest';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { toast } from '@/hooks/use-toast';
+import AdBanner from '@/components/AdBanner';
 
 const Index = () => {
   const {
@@ -185,15 +186,14 @@ Stability: ${calculateStability()}
         )}
 
         {/* Advertisement Slot - Below Speed Graph */}
-        {(isRunning || graphData.length > 0) && (
-          <section className="flex justify-center animate-fade-in px-2">
-            <div className="w-full max-w-[320px] sm:max-w-[728px] h-[100px] sm:h-[90px] rounded-lg border border-dashed border-border/50 flex items-center justify-center bg-muted/20">
-              <span className="text-xs text-muted-foreground uppercase tracking-widest text-center">
-                {t('advertisement')}
-              </span>
-            </div>
-          </section>
-        )}
+{(isRunning || graphData.length > 0) && (
+  <section className="flex justify-center animate-fade-in px-2">
+    <div className="w-full max-w-[320px] sm:max-w-[728px] h-[100px] sm:h-[90px] rounded-lg border border-dashed border-border/50 flex items-center justify-center bg-muted/20">
+      <AdBanner />
+    </div>
+  </section>
+)}
+
 
         {/* Results Section (After Completion) */}
         {isCompleted && results && (

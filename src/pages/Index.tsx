@@ -69,20 +69,20 @@ Stability: ${calculateStability()}
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b border-border/50 py-6">
+      <header className="border-b border-border/50 py-4 sm:py-6">
         <div className="container max-w-5xl mx-auto px-4">
           <div className="flex items-center justify-between">
-            {/* Logo */}
-            <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center shadow-lg">
-                <Zap className="w-5 h-5 text-primary-foreground" />
+            {/* Logo - Left */}
+            <div className="flex items-center gap-2 shrink-0">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center shadow-lg">
+                <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-primary-foreground" />
               </div>
-              <span className="text-xl font-bold tracking-tight text-foreground">SpeedNet</span>
+              <span className="text-lg sm:text-xl font-bold tracking-tight text-foreground">SpeedNet</span>
             </div>
             
-            {/* Title (centered on desktop) */}
-            <div className="hidden md:block text-center">
-              <h1 className="text-2xl font-bold tracking-tight text-foreground">
+            {/* Title - Center (desktop only) */}
+            <div className="hidden lg:block text-center flex-1 px-4">
+              <h1 className="text-xl xl:text-2xl font-bold tracking-tight text-foreground">
                 {t('title')}
               </h1>
               <p className="text-sm text-muted-foreground">
@@ -90,42 +90,44 @@ Stability: ${calculateStability()}
               </p>
             </div>
             
-            {/* Settings */}
-            <SettingsDropdown />
+            {/* Settings - Right */}
+            <div className="shrink-0">
+              <SettingsDropdown />
+            </div>
           </div>
           
-          {/* Mobile title */}
-          <div className="md:hidden text-center mt-4">
-            <h1 className="text-2xl font-bold tracking-tight text-foreground">
+          {/* Mobile/Tablet title - Below header row */}
+          <div className="lg:hidden text-center mt-4">
+            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">
               {t('title')}
             </h1>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs sm:text-sm text-muted-foreground">
               {t('subtitle')}
             </p>
           </div>
         </div>
       </header>
 
-      <main className="container max-w-4xl mx-auto px-4 py-8 space-y-8">
+      <main className="container max-w-4xl mx-auto px-4 py-6 sm:py-8 space-y-6 sm:space-y-8">
         {/* Control Area */}
         <section className="flex justify-center">
           {status === 'idle' ? (
-            <Button variant="start" size="xl" onClick={startTest}>
+            <Button variant="start" size="xl" onClick={startTest} className="w-full sm:w-auto max-w-xs">
               <Play className="w-5 h-5" />
               {t('startTest')}
             </Button>
           ) : isRunning ? (
-            <Button variant="stop" size="xl" onClick={stopTest}>
+            <Button variant="stop" size="xl" onClick={stopTest} className="w-full sm:w-auto max-w-xs">
               <Square className="w-5 h-5" />
               {t('stop')}
             </Button>
           ) : (
-            <div className="flex gap-4">
-              <Button variant="start" size="lg" onClick={restartTest}>
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
+              <Button variant="start" size="lg" onClick={restartTest} className="w-full sm:w-auto">
                 <RotateCcw className="w-4 h-4" />
                 {t('restartTest')}
               </Button>
-              <Button variant="action" size="lg" onClick={handleCopyResults}>
+              <Button variant="action" size="lg" onClick={handleCopyResults} className="w-full sm:w-auto">
                 {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                 {copied ? t('copied') : t('copyResults')}
               </Button>
@@ -184,9 +186,9 @@ Stability: ${calculateStability()}
 
         {/* Advertisement Slot - Below Speed Graph */}
         {(isRunning || graphData.length > 0) && (
-          <section className="flex justify-center animate-fade-in">
-            <div className="w-full max-w-[728px] h-[90px] md:h-[90px] rounded-lg border border-dashed border-border/50 flex items-center justify-center bg-muted/20">
-              <span className="text-xs text-muted-foreground uppercase tracking-widest">
+          <section className="flex justify-center animate-fade-in px-2">
+            <div className="w-full max-w-[320px] sm:max-w-[728px] h-[100px] sm:h-[90px] rounded-lg border border-dashed border-border/50 flex items-center justify-center bg-muted/20">
+              <span className="text-xs text-muted-foreground uppercase tracking-widest text-center">
                 {t('advertisement')}
               </span>
             </div>

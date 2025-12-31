@@ -43,7 +43,6 @@ export const useSpeedTest = () => {
 
     // Simulate download test (8 seconds)
     const downloadSpeeds: number[] = [];
-    const uploadSpeedsTemp: (number | null)[] = [];
     const baseDownload = 50 + Math.random() * 150; // 50-200 Mbps base
     
     for (let i = 0; i <= 80 && !abortRef.current; i++) {
@@ -54,7 +53,6 @@ export const useSpeedTest = () => {
       downloadSpeeds.push(speed);
       
       setCurrentSpeed(speed);
-      // Use same time for both - upload will be null during download phase
       setGraphData(prev => [...prev, { time: i / 10, download: speed, upload: null }]);
       setLiveMetrics(prev => ({ 
         ...prev, 
@@ -65,7 +63,7 @@ export const useSpeedTest = () => {
 
     if (abortRef.current) return;
 
-    // Simulate upload test (8 seconds) - starting from time 0 like download
+    // Simulate upload test (8 seconds) - UPDATE existing data points instead of appending
     setStatus('testing-upload');
     setCurrentPhase('upload');
     
@@ -80,8 +78,14 @@ export const useSpeedTest = () => {
       uploadSpeeds.push(speed);
       
       setCurrentSpeed(speed);
-      // Start upload from time 0 as well, showing parallel with download data
-      setGraphData(prev => [...prev, { time: i / 10, download: null, upload: speed }]);
+      // Update the existing data point at the same time index to add upload value
+      setGraphData(prev => {
+        const newData = [...prev];
+        if (newData[i]) {
+          newData[i] = { ...newData[i], upload: speed };
+        }
+        return newData;
+      });
       setLiveMetrics(prev => ({ 
         ...prev, 
         duration: (Date.now() - startTimeRef.current) / 1000,

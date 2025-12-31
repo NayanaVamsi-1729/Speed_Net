@@ -45,12 +45,25 @@ export const SettingsDropdown = () => {
             <span className="text-sm">{currentLang?.flag}</span>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-40 bg-card border-border">
+        <DropdownMenuContent align="end" className="w-48 max-h-80 overflow-y-auto bg-card border-border z-50">
           <DropdownMenuLabel className="text-xs text-muted-foreground">
-            Language
+            🌍 World Languages
           </DropdownMenuLabel>
+          {languages.filter(l => l.region === 'world').map((lang) => (
+            <DropdownMenuItem
+              key={lang.code}
+              onClick={() => setLanguage(lang.code)}
+              className={`cursor-pointer ${language === lang.code ? 'bg-accent' : ''}`}
+            >
+              <span className="mr-2">{lang.flag}</span>
+              <span>{lang.label}</span>
+            </DropdownMenuItem>
+          ))}
           <DropdownMenuSeparator />
-          {languages.map((lang) => (
+          <DropdownMenuLabel className="text-xs text-muted-foreground">
+            🇮🇳 Indian Languages
+          </DropdownMenuLabel>
+          {languages.filter(l => l.region === 'india').map((lang) => (
             <DropdownMenuItem
               key={lang.code}
               onClick={() => setLanguage(lang.code)}

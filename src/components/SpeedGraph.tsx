@@ -24,12 +24,12 @@ export const SpeedGraph = ({
   const formatTime = (seconds: number) => `${seconds}s`;
 
   return (
-    <div className="card-glass p-6">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
+    <div className="card-glass p-4 sm:p-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0 mb-4">
+        <h3 className="text-xs sm:text-sm font-medium uppercase tracking-widest text-muted-foreground text-center sm:text-left">
           Speed Over Time
         </h3>
-        <div className="flex gap-4">
+        <div className="flex justify-center sm:justify-end gap-4">
           <button
             onClick={onToggleDownload}
             className={`flex items-center gap-2 text-xs font-medium uppercase tracking-wider transition-opacity ${
@@ -51,7 +51,7 @@ export const SpeedGraph = ({
         </div>
       </div>
 
-      <div className="h-48">
+      <div className="h-40 sm:h-48">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={data} margin={{ top: 5, right: 5, left: -20, bottom: 5 }}>
             <XAxis

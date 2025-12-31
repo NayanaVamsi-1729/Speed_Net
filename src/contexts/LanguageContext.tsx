@@ -8,42 +8,42 @@ interface LanguageOption {
   code: Language;
   label: string;
   flag: string;
-  region?: string;
+  region: 'world' | 'india';
 }
 
 export const languages: LanguageOption[] = [
   // Major World Languages
-  { code: 'en', label: 'English', flag: '🇺🇸' },
-  { code: 'es', label: 'Español', flag: '🇪🇸' },
-  { code: 'fr', label: 'Français', flag: '🇫🇷' },
-  { code: 'de', label: 'Deutsch', flag: '🇩🇪' },
-  { code: 'pt', label: 'Português', flag: '🇧🇷' },
-  { code: 'ru', label: 'Русский', flag: '🇷🇺' },
-  { code: 'ja', label: '日本語', flag: '🇯🇵' },
-  { code: 'ko', label: '한국어', flag: '🇰🇷' },
-  { code: 'zh', label: '中文', flag: '🇨🇳' },
-  { code: 'ar', label: 'العربية', flag: '🇸🇦' },
-  { code: 'it', label: 'Italiano', flag: '🇮🇹' },
-  { code: 'nl', label: 'Nederlands', flag: '🇳🇱' },
-  { code: 'tr', label: 'Türkçe', flag: '🇹🇷' },
-  { code: 'pl', label: 'Polski', flag: '🇵🇱' },
-  { code: 'vi', label: 'Tiếng Việt', flag: '🇻🇳' },
-  { code: 'th', label: 'ไทย', flag: '🇹🇭' },
-  { code: 'id', label: 'Bahasa Indonesia', flag: '🇮🇩' },
-  { code: 'ms', label: 'Bahasa Melayu', flag: '🇲🇾' },
+  { code: 'en', label: 'English', flag: '🇺🇸', region: 'world' },
+  { code: 'es', label: 'Español', flag: '🇪🇸', region: 'world' },
+  { code: 'fr', label: 'Français', flag: '🇫🇷', region: 'world' },
+  { code: 'de', label: 'Deutsch', flag: '🇩🇪', region: 'world' },
+  { code: 'pt', label: 'Português', flag: '🇧🇷', region: 'world' },
+  { code: 'ru', label: 'Русский', flag: '🇷🇺', region: 'world' },
+  { code: 'ja', label: '日本語', flag: '🇯🇵', region: 'world' },
+  { code: 'ko', label: '한국어', flag: '🇰🇷', region: 'world' },
+  { code: 'zh', label: '中文', flag: '🇨🇳', region: 'world' },
+  { code: 'ar', label: 'العربية', flag: '🇸🇦', region: 'world' },
+  { code: 'it', label: 'Italiano', flag: '🇮🇹', region: 'world' },
+  { code: 'nl', label: 'Nederlands', flag: '🇳🇱', region: 'world' },
+  { code: 'tr', label: 'Türkçe', flag: '🇹🇷', region: 'world' },
+  { code: 'pl', label: 'Polski', flag: '🇵🇱', region: 'world' },
+  { code: 'vi', label: 'Tiếng Việt', flag: '🇻🇳', region: 'world' },
+  { code: 'th', label: 'ไทย', flag: '🇹🇭', region: 'world' },
+  { code: 'id', label: 'Bahasa Indonesia', flag: '🇮🇩', region: 'world' },
+  { code: 'ms', label: 'Bahasa Melayu', flag: '🇲🇾', region: 'world' },
   // Indian Languages
-  { code: 'hi', label: 'हिंदी', flag: '🇮🇳', region: 'India' },
-  { code: 'bn', label: 'বাংলা', flag: '🇮🇳', region: 'India' },
-  { code: 'te', label: 'తెలుగు', flag: '🇮🇳', region: 'India' },
-  { code: 'mr', label: 'मराठी', flag: '🇮🇳', region: 'India' },
-  { code: 'ta', label: 'தமிழ்', flag: '🇮🇳', region: 'India' },
-  { code: 'gu', label: 'ગુજરાતી', flag: '🇮🇳', region: 'India' },
-  { code: 'kn', label: 'ಕನ್ನಡ', flag: '🇮🇳', region: 'India' },
-  { code: 'ml', label: 'മലയാളം', flag: '🇮🇳', region: 'India' },
-  { code: 'or', label: 'ଓଡ଼ିଆ', flag: '🇮🇳', region: 'India' },
-  { code: 'pa', label: 'ਪੰਜਾਬੀ', flag: '🇮🇳', region: 'India' },
-  { code: 'as', label: 'অসমীয়া', flag: '🇮🇳', region: 'India' },
-  { code: 'ur', label: 'اردو', flag: '🇮🇳', region: 'India' },
+  { code: 'hi', label: 'हिंदी', flag: '🇮🇳', region: 'india' },
+  { code: 'bn', label: 'বাংলা', flag: '🇮🇳', region: 'india' },
+  { code: 'te', label: 'తెలుగు', flag: '🇮🇳', region: 'india' },
+  { code: 'mr', label: 'मराठी', flag: '🇮🇳', region: 'india' },
+  { code: 'ta', label: 'தமிழ்', flag: '🇮🇳', region: 'india' },
+  { code: 'gu', label: 'ગુજરાતી', flag: '🇮🇳', region: 'india' },
+  { code: 'kn', label: 'ಕನ್ನಡ', flag: '🇮🇳', region: 'india' },
+  { code: 'ml', label: 'മലയാളം', flag: '🇮🇳', region: 'india' },
+  { code: 'or', label: 'ଓଡ଼ିଆ', flag: '🇮🇳', region: 'india' },
+  { code: 'pa', label: 'ਪੰਜਾਬੀ', flag: '🇮🇳', region: 'india' },
+  { code: 'as', label: 'অসমীয়া', flag: '🇮🇳', region: 'india' },
+  { code: 'ur', label: 'اردو', flag: '🇮🇳', region: 'india' },
 ];
 
 interface LanguageContextType {

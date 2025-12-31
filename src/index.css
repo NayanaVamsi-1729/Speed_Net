@@ -100,12 +100,12 @@
     --input: 220 13% 91%;
     --ring: 217 91% 50%;
 
-    /* Custom tokens */
-    --download: 217 91% 50%;
-    --upload: 24 95% 50%;
-    --success: 142 76% 36%;
-    --warning: 45 93% 47%;
-    --danger: 0 84% 60%;
+    /* Custom tokens - darker colors for light theme visibility */
+    --download: 217 91% 40%;
+    --upload: 24 95% 42%;
+    --success: 142 76% 30%;
+    --warning: 45 93% 40%;
+    --danger: 0 84% 50%;
 
     /* Gauge colors */
     --gauge-bg: 220 14% 96%;

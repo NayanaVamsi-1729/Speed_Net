@@ -57,13 +57,13 @@ export const SpeedGraph = ({
             <XAxis
               dataKey="time"
               tickFormatter={formatTime}
-              stroke="hsl(217, 32%, 30%)"
+              stroke="hsl(var(--muted-foreground))"
               fontSize={10}
               tickLine={false}
               axisLine={false}
             />
             <YAxis
-              stroke="hsl(217, 32%, 30%)"
+              stroke="hsl(var(--muted-foreground))"
               fontSize={10}
               tickLine={false}
               axisLine={false}
@@ -71,11 +71,13 @@ export const SpeedGraph = ({
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: 'hsl(222, 47%, 8%)',
-                border: '1px solid hsl(217, 32%, 20%)',
+                backgroundColor: 'hsl(var(--card))',
+                border: '1px solid hsl(var(--border))',
                 borderRadius: '8px',
                 fontSize: '12px',
+                color: 'hsl(var(--foreground))',
               }}
+              labelStyle={{ color: 'hsl(var(--foreground))' }}
               labelFormatter={(label) => `${label}s`}
               formatter={(value: number, name: string) => [
                 `${value.toFixed(1)} Mbps`,
@@ -86,7 +88,7 @@ export const SpeedGraph = ({
               <Line
                 type="monotone"
                 dataKey="download"
-                stroke="hsl(217, 91%, 60%)"
+                stroke="hsl(var(--download))"
                 strokeWidth={2}
                 dot={false}
                 connectNulls={false}
@@ -96,7 +98,7 @@ export const SpeedGraph = ({
               <Line
                 type="monotone"
                 dataKey="upload"
-                stroke="hsl(24, 95%, 53%)"
+                stroke="hsl(var(--upload))"
                 strokeWidth={2}
                 dot={false}
                 connectNulls={false}
